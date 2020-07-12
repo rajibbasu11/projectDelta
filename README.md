@@ -3,17 +3,17 @@ this is a test project using vue and node..
 
 to start vue project 
 
-##go to client
+## go to client
 
-###npm install
+### npm install
 
-###npm run serve
+### npm run serve
 
 to start node project
 
-##go to server
+## go to server
 
-###npm install
+### npm install
 
-###npm run dev
+### npm run dev
 
