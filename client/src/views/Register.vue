@@ -177,9 +177,8 @@ export default {
                 Dob: this.Dob,
                 gender: this.gender
             }
-        apiServices.register(data).then( (result) => {
+        apiServices.register(data).then(() => {
             this.$router.push('/login')
-
         })
         }
         }

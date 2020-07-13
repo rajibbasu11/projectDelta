@@ -132,7 +132,8 @@ exports.getFriendsDataById = (req, res) => {
                     mobileNumber : resp.mobileNumber,
                     gender: resp.gender,
                     Dob: resp.Dob,
-                    userId: resp.userId
+                    userId: resp.userId,
+                    friends: resp.friends
                 }
             res.status(200).send(friendData)
             } else {

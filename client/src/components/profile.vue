@@ -35,6 +35,16 @@
               </v-col>
         </v-row>
               </v-card>
+
+          <v-card v-if="!myProfile"
+                      class="mx-auto pa-5 ma-5"
+                      max-width="600"
+                      color="#eeeeee"
+                  >
+            <p class="ma-5"><b>Mutual Friends</b></p>
+            <p v-if="meutualFriends.length === 0"> No mutual friend </p>
+            <smallProfile class="my-1" v-for="meutualFriend in meutualFriends" :key="meutualFriend.email" :friendData="meutualFriend"/>
+          </v-card>
     </div>
   </div>
 </template>
@@ -44,18 +54,19 @@ import { mapState } from 'vuex'
 import apiServices from '../../service/apiServices'
 import appBar from './appBar' 
 import { bus } from '../main'
+import smallProfile from './smallProfile'
 
 export default {
 name: 'profile',
 data: () => ({
     user: {},
-    prifileImage: ''
-    // isFriend: false,
-    // isInRequest: false,
-    // isPendingRequest: false  
+    prifileImage: '',
+    meutualFriends: [],
+    
 }),
 components: {
-  appBar
+  appBar,
+  smallProfile
 },
 props: {
     myProfile: {
@@ -95,6 +106,10 @@ mounted() {
 
     apiServices.getFriendsDataById(this.$route.params.userId).then(data => {
       this.user = data.data
+      let meutualFriendsId = this.userDetails.friends.filter(x => this.user.friends.includes(x));
+      apiServices.getFriendsData(meutualFriendsId).then((result) => {
+            this.meutualFriends = result.data
+        })
     })
   }
     if(this.user.gender === 'Female') {
